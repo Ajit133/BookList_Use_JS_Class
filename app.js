@@ -62,12 +62,18 @@ document.querySelector('#book-form').addEventListener('submit',(e)=>{
     const title = document.querySelector('#title').value;
     const author = document.querySelector('#author').value;
     const isbn = document.querySelector('#isbn').value;
+    // validate
+    if(title === ''|| author ==='' || isbn === ''){
+        alert('Please fill in all fields');
+    }else{
+        const book = new Book(title,author,isbn);
+        // console.log(book)
+        UI.addBookToList(book)
+        // clear fields 
+        UI.clearField()
+    }
 
-    const book = new Book(title,author,isbn);
-    // console.log(book)
-    UI.addBookToList(book)
-    // clear fields 
-    UI.clearField()
+    
 })
 // Event: Remove a book 
 document.querySelector('#book-list').addEventListener('click',(e)=>{
