@@ -39,7 +39,37 @@ class UI{
         `;
         list.appendChild(row)
     }
+    static deleteBook(el){
+        if(el.classList.contains('delete')){
+            el.parentElement.parentElement.remove();
+        }
+
+    }
+
+    static clearField(){
+        const title = document.querySelector('#title').value = ''
+        const author = document.querySelector('#author').value = ''
+        const isbn = document.querySelector('#isbn').value = ''
+    }
 }
 
 // Event : Display Books 
 document.addEventListener('DOMContentLoaded',UI.displayBooks)
+
+// Event : Add a Book 
+document.querySelector('#book-form').addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const title = document.querySelector('#title').value;
+    const author = document.querySelector('#author').value;
+    const isbn = document.querySelector('#isbn').value;
+
+    const book = new Book(title,author,isbn);
+    // console.log(book)
+    UI.addBookToList(book)
+    // clear fields 
+    UI.clearField()
+})
+// Event: Remove a book 
+document.querySelector('#book-list').addEventListener('click',(e)=>{
+    UI.deleteBook(e.target)
+})
